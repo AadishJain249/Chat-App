@@ -1,20 +1,18 @@
-// const socket = io()
-//     // same name in this which was given to the server side
-//     // server is sending info to the client
-// socket.on('CountUpdate', (count) => {
-//     console.log('the count has been updated', count);
-// })
-// document.querySelector('.increment').addEventListener('click', () => {
-//     console.log('Clicked!');
-//     socket.emit('increment')
-// })
-// const e = require("express")
 const msgform = document.querySelector('.form')
 const msginput = document.querySelector('input')
 const msgbutton = document.querySelector('button')
+const messages = document.querySelector('.messages')
+const msgtemplate = document.querySelector('.msg-template').innerHTML
+const locations = document.querySelector('.location')
+const loctemplate = document.querySelector('.loc-template').innerHTML
 const socket1 = io()
 socket1.on('Message', (message) => {
     console.log(message);
+    const html = Mustache.render(msgtemplate, {
+        message: message.text,
+        CreatedAt: moment(message.CreatedAt).format('h:mm a')
+    })
+    messages.insertAdjacentHTML('beforeend', html)
 })
 document.querySelector('.form').addEventListener('submit', function(e) {
     // When submitting a form, the browser sends a request to the server and refreshes the page. 
@@ -23,7 +21,7 @@ document.querySelector('.form').addEventListener('submit', function(e) {
     const msg = document.querySelector('input').value
     msgbutton.setAttribute('disabled', 'disabled')
     socket1.emit('SendMessage', msg, (error) => {
-        // msgbutton.removeAttribute('disabled')
+        msgbutton.removeAttribute('disabled')
         msginput.value = ''
         msginput.focus()
         if (error) {
@@ -41,8 +39,16 @@ document.querySelector('.location').addEventListener('click', function(e) {
     }
     navigator.geolocation.getCurrentPosition((position, callback1) => {
         locbutton.removeAttribute('disabled')
-        console.log(position)
+            // console.log(position)
         console.log('location shared');
         socket1.emit('SendMessage', { latitude: position.coords.latitude, longitude: position.coords.longitude })
     })
+})
+socket1.on('LocationMessage', (url) => {
+    console.log(url);
+    const html = Mustache.render(loctemplate, {
+        url,
+        CreatedAt1: moment(message.CreatedAt).format('h:mm a')
+    })
+    messages.insertAdjacentHTML('beforeend', html)
 })

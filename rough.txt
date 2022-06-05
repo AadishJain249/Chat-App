@@ -1,0 +1,38 @@
+
+// server side is connected
+// let count = 0
+// here socket is object which contains info
+// socket.io we send data and transfer are using event
+
+// 1.CHALLENGE
+
+// io.on('connection', (socket) => {
+//     console.log('web socket io is connected');
+//     socket.emit('CountUpdate', count)
+//     socket.on('increment', () => {
+//         count++
+//         // console.log()
+//         // socket.emit('CountUpdate', count) // emit event to specific connection expect current client
+//         io.emit('CountUpdate', count) // emit event to all connection
+//             // example agar mene socket se kara hota to ek jagh hi change hota and update nhi hota magar
+//             // agar mene io use kara ho to real time me change hoga data aur update hoga 
+//     })
+// })
+
+// 2.CHALLENGE-> to print welcome msg
+// message is welcome here
+// Message is used for emiting event 
+// msg is what i am sending the msg
+
+
+// const socket = io()
+//     // same name in this which was given to the server side
+//     // server is sending info to the client
+// socket.on('CountUpdate', (count) => {
+//     console.log('the count has been updated', count);
+// })
+// document.querySelector('.increment').addEventListener('click', () => {
+//     console.log('Clicked!');
+//     socket.emit('increment')
+// })
+// const e = require("express")

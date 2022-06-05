@@ -1,2 +1,4 @@
-callback is not function
-location is not rendring it is not generating link
+1.callback is not function
+2.location is not rendring it is not generating link
+3.input field is not resetting
+4.whenever i am sending more than 15msg css is not working 

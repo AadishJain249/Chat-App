@@ -45,10 +45,15 @@ document.querySelector('#location').addEventListener('click', function(e) {
     })
 })
 socket1.on('LocationMessage', (url) => {
-    console.log(url);
-    const html = Mustache.render(loctemplate, {
-        url,
-        CreatedAt1: moment(message.CreatedAt).format('h:mm a')
+        console.log(url);
+        const html = Mustache.render(loctemplate, {
+            url,
+            CreatedAt1: moment(message.CreatedAt).format('h:mm a')
+        })
+        messages.insertAdjacentHTML('beforeend', html)
     })
-    messages.insertAdjacentHTML('beforeend', html)
-})
+    // ignoreQueryPrefix ye jo username ke aage question mark hai use remove ya ignore kar dega
+    // destructing 
+const { username, room } = Qs.parse(location.search, { ignoreQueryPrefix: true })
+    // client se event emit or server pe listen hoga
+socket1.emit('join', ({ username, room }))

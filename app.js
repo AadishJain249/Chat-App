@@ -13,24 +13,30 @@ app.use(express.static(dir))
 let message = 'Welcome Here!'
 io.on('connection', (socket) => {
     console.log('Web Socket io is connected');
-    socket.emit('Message', GenerateMsg('Welcome!'))
-    socket.broadcast.emit('Message', GenerateMsg('new user is joined'))
     socket.on('SendMessage', (msg, callback) => {
         const Filter = new filter()
         if (Filter.isProfane(msg)) {
             return callback('this message is not allowed')
         }
         // everytime server emits an event it is emitting an object
-        io.emit('Message', GenerateMsg(msg))
+        io.to('Center City').emit('Message', GenerateMsg(msg))
             // callback()
     })
     socket.on('LocationMessage', (coords, callback) => {
         io.emit('Message', Generateloc(`http://google.com/maps?q=:${coords.latitude},${coords.longitude}`))
             // callback()
     })
+    socket.on('join', ({ username, room }) => {
+        // room is channel in which socket can leave or join
+        // socket.join to access those room
+        // socket.to().emit('') to broadcast or emit a event
+        socket.join(room)
+        socket.emit('Message', GenerateMsg('Welcome!'))
+        socket.broadcast.to(room).emit('Message', GenerateMsg(`${username} has joined!`))
 
-    socket.on('disconnect', () => {
-        io.emit('Message', GenerateMsg('a user has left'))
+        socket.on('disconnect', () => {
+            io.emit('Message', GenerateMsg(`a user has left`))
+        })
     })
 })
 server.listen(port, () => {

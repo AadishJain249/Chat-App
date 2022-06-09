@@ -1,12 +1,15 @@
-const GenerateMsg = (text) => {
+const GenerateMsg = (username, text) => {
     return {
+        username,
         text,
         CreatedAt: new Date().getTime()
     }
 }
-const Generateloc = () => {
+const Generateloc = (username, url) => {
     return {
-        CreatedAt1: new Date().getTime()
+        username,
+        url,
+        CreatedAt: new Date().getTime()
     }
 }
 module.exports = {

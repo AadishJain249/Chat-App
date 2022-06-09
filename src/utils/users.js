@@ -8,7 +8,7 @@ const adduser = ({ id, username, room }) => {
     // Aadish aadish are same user thats why we use tolowercase
     username = username.trim().toLowerCase()
     room = room.trim().toLowerCase()
-        // check if above is filled or not
+        //     // check if above is filled or not
     if (!room || !username) {
         return {
             error: 'fill the above details'
@@ -41,44 +41,14 @@ const remove = (id) => {
 }
 const getuser = (id) => {
     // return users.find((user) => user.id === id)
-    const checkid = users.find((user) => user.id === id)
-    if (checkid) {
-        return checkid
-    }
+    return users.find((user) => user.id === id)
+
 }
+
 const getroom = (room) => {
-    const checkroom = users.find((user) => user.room === room)
-    if (checkroom) {
-        return checkroom
-    }
+    room = room.trim().toLowerCase();
+    return users.filter((user) => user.room === room)
 }
-adduser({
-    id: 32,
-    username: 'aadish',
-    room: '1st'
-}, {
-    id: 33,
-    username: 'aarushi',
-    room: '2nd'
-}, {
-    id: 34,
-    username: 'ichigo',
-    room: '3rd'
-})
-
-console.log(users);
-
-const rem = remove(32)
-console.log(rem);
-
-const get = getuser(32)
-console.log(get);
-
-const getRoom = getroom('1st')
-console.log(getRoom);
-
-console.log(users);
-
 module.exports = {
     adduser,
     remove,

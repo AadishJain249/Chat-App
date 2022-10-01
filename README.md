@@ -1,3 +1,11 @@
+# Node.js Chat App
+A simple demo chat app built on [Node.js](https://nodejs.org/), [Express.js](https://expressjs.com/) and [Socket.io](https://socket.io/).
+<br><br>
+
+# How to install and run the project
+- Do npm i for this project after installing all dependencies and do nodemon app.js start 
+
+# Project Screenshot
 ![image](https://user-images.githubusercontent.com/87666139/193426374-47ea41f7-d6f8-4633-8308-02762eab14af.png)
 <br><br>
 ![image](https://user-images.githubusercontent.com/87666139/193426390-9dbe4924-c5e3-471a-8d9f-1349f3a5a28b.png)
